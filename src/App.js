@@ -1,3 +1,4 @@
+import React from 'react';
 import Card from './components/Card';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
@@ -10,6 +11,27 @@ const arr = [
 ];
 
 function App() {
+  // const [count, setCount] = React.useState(0);
+
+
+  // const plus = () => {
+  //     setCount(count + 1)
+  // }
+
+  // const minus = () =>{
+  //   setCount(count - 1)
+  // }
+  
+  // return(
+  //   <div className="">
+  //      <h1>{count}</h1>
+  //   <button onClick={plus}>+</button>
+  //   <button onClick={minus}>-</button>
+  //  </div>
+  // );
+
+
+  
   return (
     <div className="wrapper clear">
 
@@ -24,14 +46,15 @@ function App() {
           </div>
         </div>
 
-        <div className="d-flex">
 
+        <div className="d-flex">
         {arr.map((obj) => (
           <Card
           title={obj.title}
           price={obj.price}
           imgerUrl={obj.imgerUrl}
-          onClick={()=> console.log(obj)}
+          onFavorite={() => console.log("добавить в закладки")}
+          onPlus={()=> console.log("Нажали плюс")}
           />
         ))}
          </div>
