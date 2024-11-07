@@ -3,7 +3,46 @@ import Card from './components/Card';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 
-
+// {
+//   "title": "Мужские кроссовки Nike Air Max 270",
+//   "price": 15600,
+//   "imgerUrl": "/img/sneakers/1.jpg"
+// },
+// {
+//   "title": "Мужские кроссовки Nike Air Max 270",
+//   "price": 15600,
+//   "imgerUrl": "/img/sneakers/2.jpg"
+// },
+// {
+//   "title": "Мужские кроссовки Nike Air Max 270",
+//   "price": 15600,
+//   "imgerUrl": "/img/sneakers/1.jpg"
+// },
+// {
+//   "title": "Мужские кроссовки Nike Air Max 270",
+//   "price": 15600,
+//   "imgerUrl": "/img/sneakers/2.jpg"
+// },
+// {
+//   "title": "Мужские кроссовки Nike Air Max 270",
+//   "price": 15600,
+//   "imgerUrl": "/img/sneakers/1.jpg"
+// },
+// {
+//   "title": "Мужские кроссовки Nike Air Max 270",
+//   "price": 15600,
+//   "imgerUrl": "/img/sneakers/2.jpg"
+// },
+// {
+//   "title": "Мужские кроссовки Nike Air Max 270",
+//   "price": 15600,
+//   "imgerUrl": "/img/sneakers/1.jpg"
+// },
+// {
+//   "title": "Мужские кроссовки Nike Air Max 270",
+//   "price": 15600,
+//   "imgerUrl": "/img/sneakers/2.jpg"
+// },
 
 function App() {
   // const [count, setCount] = React.useState(0);
@@ -31,16 +70,20 @@ function App() {
   React.useEffect(() =>{
     fetch('https://672b25ec976a834dd025cf71.mockapi.io/items')
     .then((res) =>  {
-    return res.json();
-  })
-  .then((json) => {
-    setItems(json);
-      });
-  }, []);
+      return res.json();
+    })
+    .then((json) => {
+      setItems(json);
+        });
+    }, []);
+
+  const onAddToCart = (obj) =>{
+    setCartItems(prev => [...prev, obj]);
+  };
 
   return (
     <div className="wrapper clear">
-      {cartOpened && <Drawer item={cartItems} onClose = {() => setCartOpened(false)} />}
+      {cartOpened && <Drawer items={cartItems} onClose = {() => setCartOpened(false)} />}
       <Header onClickCart = {() => setCartOpened(true)}/>
 
       <div className="content p-40">
@@ -54,13 +97,13 @@ function App() {
 
 
         <div className="d-flex flex-wrap">
-        {items.map((obj) => (
+        {items.map((item) => (
           <Card
-          title={obj.title}
-          price={obj.price}
-          imgerUrl={obj.imgerUrl}
+          title={item.title}
+          price={item.price}
+          imagerUrl={item.imagerUrl}
           onFavorite={() => console.log("добавить в закладки")}
-          onPlus={()=> console.log("Нажали плюс")}
+          onPlus={(obj) => onAddToCart(obj)}
           />
         ))}
          </div>
