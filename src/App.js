@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
@@ -104,7 +104,7 @@ function App() {
         setFavorites((prev) => [...prev, data]);
       }
     } catch(error){
-      alert('Не удалось добавить  в фавориты')
+      console.log('Не удалось добавить  в фавориты')
     }
    
   };
@@ -121,23 +121,31 @@ function App() {
           setCartOpened(false)} onRemove={onRemoveItem} />
         )}
       <Header onClickCart={() => setCartOpened(true)} />
-
-      <Route path="/" exact>
-        <Home 
-        items={items} 
-        searchValue={searchValue} 
-        setSearchValue={setSearchValue}
-        onChangeSearchInput={onChangeSearchInput}
-        onAddToFavorite={onAddToFavorite}
-        onAddToCart={onAddToCart}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              items={items}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              onChangeSearchInput={onChangeSearchInput}
+              onAddToFavorite={onAddToFavorite}
+              onAddToCart={onAddToCart}
+            />
+          }
         />
-      </Route>
-
-      <Route path="/favorites" exact>
-        <Favorites items={favorites} onAddToFavorite={onAddToFavorite}/>
-      </Route>
+        <Route
+          path="/favorites"
+          element={
+            <Favorites
+              items={favorites}
+              onAddToFavorite={onAddToFavorite}
+            />
+          }
+        />
+      </Routes>
     </div>
-
   );
 }
 export default App;

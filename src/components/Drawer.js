@@ -5,12 +5,12 @@ function Drawer({ onClose, onRemove, items = [] }) {
     <div className="overlay">
       <div className="drawer">
         <h2 className="d-flex justify-between mb-30">
-          Корзина <img onClick={onClose} className="cu-p" src="/img/btn-remove.svg" alt="Remove" />
+          Корзина <img onClick={onClose} className="cu-p"
+           src="/img/btn-remove.svg" alt="Remove" />
         </h2>
 
 
-        {
-          items.length > 0 ? (
+        {items.length > 0 ? (
             <div>
               <div className="items">
                 {items.map((obj) => (
